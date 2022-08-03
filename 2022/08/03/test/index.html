@@ -22,28 +22,35 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="GO&amp;KEGG富集分析（二）--非模式物种OrgDB的构建 Clusterprofile&amp;OrgDB ClusterProfiler是一个功能强大的R包，同时支持GO和KEGG的富集分析，而且可视化功能非常的优秀，那么怎么利用这个R包来进行富集分析。进行分析时，首先就要求注释信息。Bioconductor上提供了以下19个物种的Org类型的包，包含了这些模式物种的GO及KEGG注释">
+<meta property="og:type" content="article">
 <meta property="og:title" content="BI在路上">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/2022/08/03/test/index.html">
 <meta property="og:site_name" content="BI在路上">
+<meta property="og:description" content="GO&amp;KEGG富集分析（二）--非模式物种OrgDB的构建 Clusterprofile&amp;OrgDB ClusterProfiler是一个功能强大的R包，同时支持GO和KEGG的富集分析，而且可视化功能非常的优秀，那么怎么利用这个R包来进行富集分析。进行分析时，首先就要求注释信息。Bioconductor上提供了以下19个物种的Org类型的包，包含了这些模式物种的GO及KEGG注释">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rezpd63h5.hd-bkt.clouddn.com/FgCpszolofE6B7LScCje82BGVdiK">
+<meta property="og:image" content="http://rezpd63h5.hd-bkt.clouddn.com/FlGgxLcQeMil6eHD7u4cV2bPceWq">
+<meta property="article:published_time" content="2022-08-03T03:11:38.153Z">
+<meta property="article:modified_time" content="2022-08-03T03:12:46.244Z">
 <meta property="article:author" content="在路上">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://rezpd63h5.hd-bkt.clouddn.com/FgCpszolofE6B7LScCje82BGVdiK">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2022/08/03/test/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>BI在路上</title>
+  <title> | BI在路上</title>
   
 
 
@@ -146,9 +153,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -164,10 +172,9 @@
       <meta itemprop="name" content="BI在路上">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
+        <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2022/08/03/test/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -180,7 +187,14 @@
               <time title="创建时间：2022-08-03 11:11:38 / 修改时间：11:12:46" itemprop="dateCreated datePublished" datetime="2022-08-03T11:11:38+08:00">2022-08-03</time>
             </span>
 
-          <br>
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -205,7 +219,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <div class="output_wrapper" id="output_wrapper_id"><p></p><p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br><strong><a href="#jump_20">GO&amp;KEGG富集分析（二）--非模式物种OrgDB的构建</a></strong></p>
+        <div class="output_wrapper" id="output_wrapper_id"><p></p><p style="text-align:center;color:#1e819e;font-size:1.3em;font-weight: bold;"><br><strong><a href="#jump_20">GO&amp;KEGG富集分析（二）--非模式物种OrgDB的构建</a></strong></p>
 <h3 id="hclusterprofileorgdb"><span>Clusterprofile&amp;OrgDB</span></h3>
 <p>ClusterProfiler是一个功能强大的R包，同时支持GO和KEGG的富集分析，而且可视化功能非常的优秀，那么怎么利用这个R包来进行富集分析。<br>进行分析时，首先就要求注释信息。Bioconductor上提供了以下19个物种的Org类型的包，包含了这些模式物种的GO及KEGG注释信息 <br></p><figure><img src="http://rezpd63h5.hd-bkt.clouddn.com/FgCpszolofE6B7LScCje82BGVdiK" alt="" title=""><figcaption></figcaption></figure><br>对于以上19个物种，只需要安装对应的org包，clusterProfile就会自动从中获取GO注释信息，我们只需要差异基因的列表就可以了，使用起来非常方便。但是没有Orgdb的物种，就需要自己构建或者利用他人上传的数据，这里建议自己构建，不存在ID的错误问题。<p></p>
 <h3 id="horgdb"><span>构建非模式物种OrgDB</span></h3>
@@ -217,7 +231,6 @@
 <blockquote>
   <p>微信公众号：BI在路上<br>如果你觉得BI对你有帮助，欢迎关注！</p>
 </blockquote></div>
-      
     </div>
 
     
@@ -225,107 +238,61 @@
     
 	
 	
+     <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+     </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>在路上
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2022/08/03/test/" title="">http://example.com/2022/08/03/test/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/02/hello-world/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="在路上">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BI在路上">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/08/02/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-08-02 17:01:30" itemprop="dateCreated datePublished" datetime="2022-08-02T17:01:30+08:00">2022-08-02</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>367</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/02/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-	
-	
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
 
           </div>
           
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NjkzNy8zMzQwMQ=="></div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -372,6 +339,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hclusterprofileorgdb"><span class="nav-number">1.</span> <span class="nav-text">Clusterprofile&amp;OrgDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#horgdb"><span class="nav-number">2.</span> <span class="nav-text">构建非模式物种OrgDB</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -549,6 +517,21 @@ $(document).ready(function() {
 
   
 
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
 </body>
 </html>
